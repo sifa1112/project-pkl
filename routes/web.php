@@ -48,3 +48,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']],
             return 'halaman profil karyawan';
         });
     });
+
+    Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function(){
+        Route::get('karyawan', function(){
+            return ('karyawan.index');
+        })->middleware(['role:admin']);
+
+        Route::get('gaji', function(){
+            return ('gaji.index');
+        })->middleware(['role:admin|karyawan']);
+    });
