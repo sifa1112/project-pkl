@@ -76,6 +76,7 @@
         </nav>
 
         <main class="py-4">
+        @include('layouts._flash')
             @yield('content')
         </main>
     </div>

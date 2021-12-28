@@ -15,7 +15,8 @@ class CreateAbsensTable extends Migration
     {
         Schema::create('absens', function (Blueprint $table) {
             $table->id();
-            $table->foreign('id_karyawan')->references('id')->on('karyawans');
+            $table->bigInteger('id_karyawan')->unsigned();
+            $table->foreign('id_karyawan')->references('id')->on('karyawans'); 
             $table->date('tanggal');
             $table->string('status_absen');
             $table->timestamps();

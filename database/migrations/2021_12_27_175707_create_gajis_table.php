@@ -15,9 +15,12 @@ class CreateGajisTable extends Migration
     {
         Schema::create('gajis', function (Blueprint $table) {
             $table->id();
-            $table->foreign('id_karyawan')->references('id')->on('karyawans');
             $table->float('gaji_pokok');
-            $table->foreign('nama_jabatan')->references('id')->on('jabatans');
+            $table->float('tunjangan'); 
+            $table->bigInteger('id_karyawan')->unsigned();
+            $table->foreign('id_karyawan')->references('id')->on('karyawans');  
+            $table->bigInteger('id_jabatan')->unsigned();
+            $table->foreign('id_jabatan')->references('id')->on('jabatans'); 
             $table->timestamps();
         });
     }
