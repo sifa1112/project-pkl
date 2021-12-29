@@ -241,18 +241,23 @@ return [
             'text' => 'search',
         ],
         [
-            'text' => 'data karyawan',
-            'url'  => 'admin/data karyawan',
+            'text' => 'Data Karyawan',
+            'url'  => 'admin/karyawan',
             'icon'  => 'far fa-fw fa-file',
         ],
         [
-            'text' => 'data gaji',
-            'url'  => 'admin/data gaji',
+            'text' => 'Data Jabatan',
+            'url'  => 'admin/jabatan',
             'icon'  => 'far fa-fw fa-file',
         ],
         [
-            'text' => 'data rekap',
-            'url'  => 'admin/data rekap',
+            'text' => 'Data Gaji',
+            'url'  => 'admin/gaji',
+            'icon'  => 'far fa-fw fa-file',
+        ],
+        [
+            'text' => 'Data Absen',
+            'url'  => 'admin/absen',
             'icon'  => 'far fa-fw fa-file',
         ],
         

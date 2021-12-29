@@ -14,7 +14,8 @@ class JabatanController extends Controller
      */
     public function index()
     {
-        //
+        $jabatan = Jabatan::all();
+        return view('admin.jabatan.index', compact('jabatan'));
     }
 
     /**
@@ -24,7 +25,7 @@ class JabatanController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.jabatan.create');
     }
 
     /**
@@ -35,7 +36,16 @@ class JabatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_jabatan' => 'required',
+            'gaji_pokok' => 'required',
+        ]);
+
+        $jabatan = new jabatan;
+        $jabatan->nama_jabatan = $request->nama_jabatan;
+        $jabatan->gaji_pokok = $request->gaji_pokok;
+        $jabatan->save();
+        return redirect()->route('jabatan.index');
     }
 
     /**
@@ -44,9 +54,10 @@ class JabatanController extends Controller
      * @param  \App\Models\Jabatan  $jabatan
      * @return \Illuminate\Http\Response
      */
-    public function show(Jabatan $jabatan)
+    public function show($id)
     {
-        //
+        $jabatan = Jabatan::findOrFail($id);
+        return view('admin.jabatan.show', compact('jabatan'));
     }
 
     /**
@@ -55,9 +66,10 @@ class JabatanController extends Controller
      * @param  \App\Models\Jabatan  $jabatan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Jabatan $jabatan)
+    public function edit($id)
     {
-        //
+        $jabatan = Jabatan::findOrFail($id);
+        return view('admin.jabatan.edit', compact('jabatan'));
     }
 
     /**
@@ -67,9 +79,18 @@ class JabatanController extends Controller
      * @param  \App\Models\Jabatan  $jabatan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jabatan $jabatan)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_jabatan' => 'required',
+            'gaji_pokok' => 'required',
+        ]);
+
+        $jabatan = Jabatan::findOrFail($id);
+        $jabatan->nama_jabatan = $request->nama_jabatan;
+        $jabatan->gaji_pokok = $request->gaji_pokok;
+        $jabatan->save();
+        return redirect()->route('jabatan.index');
     }
 
     /**
@@ -78,8 +99,10 @@ class JabatanController extends Controller
      * @param  \App\Models\Jabatan  $jabatan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jabatan $jabatan)
+    public function destroy($id)
     {
-        //
+        $jabatan = Jabatan::findOrFail($id);
+        $jabatan->delete();
+        return redirect()->route('jabatan.index');
     }
 }

@@ -15,39 +15,32 @@ Dashboard
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Data Karyawan
-                        <a href="{{ route('karyawan.create') }}" class="btn btn-sm btn-outline-primary"
-                            style="float: right">Tambah Data</a>
+                        Data Jabatan
+                        <a href="{{ route('jabatan.create') }}" class="btn btn-sm btn-outline-primary"
+                            style="float: right">Tambah Data Jabatan</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
                                 <tr>
                                     <th>Nomor</th>
-                                    <th>Nama Karywan</th>
-                                    <th>Tempat & Tanggal Lahir</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Agama</th>
-                                    <th>Alamat</th>
-                                    <th>Nomor HP</th>
+                                    <th>Nama Jabatan</th>
+                                    <th>Gaji Pokok</th>
                                     <th>Action</th>
                                 </tr>
                                 @php $no=1; @endphp
-                                @foreach ($karyawan as $data)
+                                @foreach ($jabatan as $data)
                                     <tr>
                                         <td>{{ $no++ }}</td>
-                                        <td>{{ $data->nama_karyawan }}</td>
-                                        <td>{{ $data->ttl }}</td>
-                                        <td>{{ $data->jk }}</td>
-                                        <td>{{ $data->agama }}</td>
-                                        <td>{{ $data->alamat }}</td>
-                                        <td>{{ $data->no_tlp }}</td>
-                                            <form action="{{ route('karyawan.destroy', $data->id) }}" method="post">
+                                        <td>{{ $data->nama_jabatan }}</td>
+                                        <td>Rp. {{ number_format($data->gaji_pokok) }}</td>
+                                        <td>
+                                            <form action="{{ route('jabatan.destroy', $data->id) }}" method="post">
                                                 @method('delete')
                                                 @csrf
-                                                <a href="{{ route('karyawan.edit', $data->id) }}"
+                                                <a href="{{ route('jabatan.edit', $data->id) }}"
                                                     class="btn btn-outline-info">Edit</a>
-                                                <a href="{{ route('karyawan.show', $data->id) }}"
+                                                <a href="{{ route('jabatan.show', $data->id) }}"
                                                     class="btn btn-outline-warning">Show</a>
                                                 <button type="submit" class="btn btn-outline-danger"
                                                     onclick="return confirm('Are you sure?');">Delete</button>

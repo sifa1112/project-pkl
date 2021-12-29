@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Karyawan;
 use Illuminate\Http\Request;
 
 class KaryawanController extends Controller
@@ -13,7 +14,8 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        //
+        $karyawan = Karyawan::all();
+        return view('admin.karyawan.index', compact('karyawan'));
     }
 
     /**
@@ -23,7 +25,7 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.karyawan.create');
     }
 
     /**
@@ -34,7 +36,24 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_karyawan' => 'required',
+            'ttl' => 'required',
+            'jk' => 'required',
+            'agama' => 'required',
+            'alamat' => 'required',
+            'no_tlp' => 'required',
+        ]);
+
+        $karyawan = new Karyawan;
+        $karyawan->nama_karyawan = $request->nama_karyawan;
+        $karyawan->ttl = $request->ttl;
+        $karyawan->jk = $request->jk;
+        $karyawan->agama = $request->agama;
+        $karyawan->alamat = $request->alamat;
+        $karyawan->no_tlp = $request->no_tlp;
+        $karyawan->save();
+        return redirect()->route('karyawan.index');
     }
 
     /**
@@ -45,7 +64,8 @@ class KaryawanController extends Controller
      */
     public function show($id)
     {
-        //
+        $karyawan = Karyawan::findOrFail($id);
+        return view('admin.karyawan.show', compact('karyawan'));
     }
 
     /**
@@ -56,7 +76,8 @@ class KaryawanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $karyawan = Karyawan::findOrFail($id);
+        return view('admin.karyawan.edit', compact('karyawan'));
     }
 
     /**
@@ -68,7 +89,24 @@ class KaryawanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_karyawan' => 'required',
+            'ttl' => 'required',
+            'jk' => 'required',
+            'agama' => 'required',
+            'alamat' => 'required',
+            'no_tlp' => 'required',
+        ]);
+
+        $karyawan = Karyawan::findOrFail($id);
+        $karyawan->nama_karyawan = $request->nama_karyawan;
+        $karyawan->ttl = $request->ttl;
+        $karyawan->jk = $request->jk;
+        $karyawan->agama = $request->agama;
+        $karyawan->alamat = $request->alamat;
+        $karyawan->no_tlp = $request->no_tlp;
+        $karyawan->save();
+        return redirect()->route('karyawan.index');
     }
 
     /**
@@ -79,6 +117,8 @@ class KaryawanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $karyawan = Karyawan::findOrFail($id);
+        $karyawan->delete();
+        return redirect()->route('karyawan.index');
     }
 }
