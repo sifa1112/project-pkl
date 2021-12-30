@@ -73,6 +73,20 @@ Dashboard
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label for="">Jabatan</label>
+                                <select name="jabatan_id" class="form-control @error('jabatan_id') is-invalid @enderror">
+                                    <option value="">Pilih Jabatan</option>
+                                    @foreach ($jabatan as $data)
+                                        <option value="{{ $data->id }}">{{ $data->nama_jabatan }}</option>
+                                    @endforeach
+                                </select>
+                                @error('jabatan_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <button type="reset" class="btn btn-outline-warning">Reset</button>
                                 <button type="submit" class="btn btn-outline-primary">Save</button>
                             </div>

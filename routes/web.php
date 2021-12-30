@@ -29,17 +29,17 @@ Auth::routes(
 
  Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// //route admin
-// Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']],
-//     function () {
-//         Route::get('/', function () {
-//             return 'halaman admin';
-//         });
+ //route admin
+ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']],
+     function () {
+             Route::get('/', function () {
+                 return 'halaman admin';
+         });
         
-//         Route::get('profile', function () {
-//             return 'halaman profil admin';
-//         });
-//     });
+Route::get('profile', function () {
+                                  return 'halaman profil admin';
+                         });
+                     });
 
     //member
     // Route::group(['prefix' => 'karyawan', 'middleware' => ['auth', 'role:karyawan']],
@@ -54,6 +54,8 @@ Auth::routes(
     // });
     Route::get('/home', [App\Http\Controllers\KaryawanController::class, 'index'])->name('karyawan');
     Route::get('/home', [App\Http\Controllers\JabatanController::class, 'index'])->name('jabatan');
+    Route::get('/home', [App\Http\Controllers\GajiController::class, 'index'])->name('home');
+
 
     Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function(){
         Route::get('karyawan', function(){
@@ -66,6 +68,7 @@ Auth::routes(
 
         Route::resource('karyawan', KaryawanController::class);
         Route::resource('jabatan', JabatanController::class);
+        Route::resource('gaji', GajiController::class);
 
         
     });

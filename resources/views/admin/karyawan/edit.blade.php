@@ -1,5 +1,15 @@
-@extends('adminlte::page.admin')
+@extends('adminlte::page')
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+
+Dashboard 
+
+@stop
+
 @section('content')
+@include('layouts._flash')
     <div class="container">
         <div class="row">
             <div class="col">
@@ -72,6 +82,22 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label for="">Jabatan</label>
+                                <select name="jabatan_id" class="form-control @error('jabatan_id') is-invalis @enderror">
+                                    <option value="">Pilih Penulis</option>
+                                    @foreach ($jabatan as $data)
+                                        <option value="{{ $data->id }}"
+                                        {{ $data->id == $karyawan->jabatan_id ? 'selected="selected"' : '' }}>
+                                        {{$data->nama_jabatan}}</option>
+                                    @endforeach
+                                </select>
+                                @error('jabatan_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <br>
                                 <button type="reset" class="btn btn-outline-warning">Reset</button>
                                 <button type="submit" class="btn btn-outline-primary">Save</button>
@@ -82,4 +108,13 @@
             </div>
         </div>
     </div>
-@endsection
+    @stop
+
+@section('css')
+
+
+@stop
+
+@section('js')
+
+@stop

@@ -20,9 +20,9 @@ class CreateKaryawansTable extends Migration
             $table->string('jk');
             $table->string('agama');
             $table->string('alamat');
-            $table->bigInteger('no_tlp');
-            $table->bigInteger('id_jabatan')->unsigned();
-            $table->foreign('id_jabatan')->references('id')->on('jabatans');
+            $table->string('no_tlp');
+            $table->bigInteger('jabatan_id')->unsigned();
+            $table->foreign('jabatan_id')->references('id')->on('jabatans');
             $table->timestamps ();
         });
     }

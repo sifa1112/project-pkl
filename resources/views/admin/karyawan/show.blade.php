@@ -1,5 +1,15 @@
-@extends('adminlte::page.admin')
+@extends('adminlte::page')
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+
+Dashboard 
+
+@stop
+
 @section('content')
+@include('layouts._flash')
     <div class="container">
         <div class="row">
             <div class="col">
@@ -31,6 +41,10 @@
                                 <input type="text" name="no_tlp" value="{{ $karyawan->no_tlp }}" class="form-control" readonly>
                             </div>
                             <div class="form-group">
+                                <label for="">Jabatan</label>
+                                <br>
+                                <input type="text" name="" class="form-control" value="{{ $gaji->jabatan->nama_jabatan }}" readonly>                            </div>
+                            <div class="form-group">
                                 <br>
                                 <a href="{{ url('admin/karyawan') }}" class="btn btn-block btn-outline-primary">Kembali</a>
                             </div>
@@ -40,4 +54,13 @@
             </div>
         </div>
     </div>
-@endsection
+    @stop
+
+@section('css')
+
+
+@stop
+
+@section('js')
+
+@stop

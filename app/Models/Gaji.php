@@ -8,18 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Gaji extends Model
 {
     use HasFactory;
-    protected $fillable = ['gaji_pokok','tunjangan','id_karyawan','id_jabatan'];
+    protected $fillable = ['gaji_pokok','tunjangan','karyawan_id','jabatan_id'];
 
     public function karyawan()
     {
         //model karyawan bisa memiliki 1 data dari model wali
-        //melalui fk 'id_karyawan'
-        return $this->belongsTo('App\Models\Karyawan','id_karyawan');
+        //melalui fk 'karyawan_id'
+        return $this->belongsTo('App\Models\Karyawan','karyawan_id');
 }
     public function jabatan()
     {
         //model jabatan bisa memiliki 1 data dari model wali
-        //melalui fk 'id_jabatan'
-        return $this->belongsTo('App\Models\Jabatan','id_jabatan');
+        //melalui fk 'jabatan_id'
+        return $this->belongsTo('App\Models\Jabatan','jabatan_id');
 }
 }

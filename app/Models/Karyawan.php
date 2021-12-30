@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Karyawan extends Model
 {
     use HasFactory;
-    protected $fillable = ['nama', 'ttl', 'jk', 'agama', 'no_tlp', 'id_jabatan'];
+    protected $fillable = ['nama', 'ttl', 'jk', 'agama', 'no_tlp', 'jabatan_id'];
 
     public function jabatan()
     {
-        // data model Mahasiswa dimiliki oleh model jabatan melalui fk 'id_jabatan'
-        return $this->belongsTo('App\Models\Jabatan', 'id_jabatan');
+        // data model Mahasiswa dimiliki oleh model jabatan melalui fk 'jabatan_id'
+        return $this->belongsTo('App\Models\Jabatan', 'jabatan_id');
     }
 
     public function gaji()

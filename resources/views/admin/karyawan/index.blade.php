@@ -24,13 +24,15 @@ Dashboard
                             <table class="table">
                                 <tr>
                                     <th>Nomor</th>
-                                    <th>Nama Karywan</th>
+                                    <th>Nama Karyawan</th>
                                     <th>Tempat & Tanggal Lahir</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Agama</th>
                                     <th>Alamat</th>
                                     <th>Nomor HP</th>
+                                    <th>Jabatan</th>
                                     <th>Action</th>
+                                    
                                 </tr>
                                 @php $no=1; @endphp
                                 @foreach ($karyawan as $data)
@@ -42,6 +44,8 @@ Dashboard
                                         <td>{{ $data->agama }}</td>
                                         <td>{{ $data->alamat }}</td>
                                         <td>{{ $data->no_tlp }}</td>
+                                        <td>{{ $data->jabatan->nama_jabatan }}</td>
+                                        <td>
                                             <form action="{{ route('karyawan.destroy', $data->id) }}" method="post">
                                                 @method('delete')
                                                 @csrf

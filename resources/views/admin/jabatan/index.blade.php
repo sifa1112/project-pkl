@@ -21,13 +21,16 @@ Dashboard
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="jabatan">
+                                <thead>
                                 <tr>
                                     <th>Nomor</th>
                                     <th>Nama Jabatan</th>
                                     <th>Gaji Pokok</th>
                                     <th>Action</th>
                                 </tr>
+                                </thead>
+                                <tbody>
                                 @php $no=1; @endphp
                                 @foreach ($jabatan as $data)
                                     <tr>
@@ -48,6 +51,7 @@ Dashboard
                                         </td>
                                     </tr>
                                 @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -58,10 +62,15 @@ Dashboard
     @stop
 
 @section('css')
+    <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css')}}">
+    @endsection
 
-
-@stop
 
 @section('js')
-
-@stop
+    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#jabatan').DataTable();
+        });
+        </script>
+@endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jabatan;
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        $karyawan = Karyawan::all();
+        $karyawan = Karyawan::with('jabatan')->get();
         return view('admin.karyawan.index', compact('karyawan'));
     }
 
@@ -25,7 +26,9 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-        return view('admin.karyawan.create');
+        //mengambil data jabatan
+        $jabatan = Jabatan::all();
+        return view('admin.karyawan.create', compact('jabatan'));
     }
 
     /**
@@ -43,6 +46,7 @@ class KaryawanController extends Controller
             'agama' => 'required',
             'alamat' => 'required',
             'no_tlp' => 'required',
+            'jabatan_id' => 'required',
         ]);
 
         $karyawan = new Karyawan;
@@ -52,6 +56,7 @@ class KaryawanController extends Controller
         $karyawan->agama = $request->agama;
         $karyawan->alamat = $request->alamat;
         $karyawan->no_tlp = $request->no_tlp;
+        $karyawan->jabatan_id = $request->jabatan_id;
         $karyawan->save();
         return redirect()->route('karyawan.index');
     }
@@ -77,7 +82,8 @@ class KaryawanController extends Controller
     public function edit($id)
     {
         $karyawan = Karyawan::findOrFail($id);
-        return view('admin.karyawan.edit', compact('karyawan'));
+        $jabatan = Jabatan::all();
+        return view('admin.karyawan.edit', compact('karyawan', 'jabatan'));
     }
 
     /**
@@ -96,6 +102,7 @@ class KaryawanController extends Controller
             'agama' => 'required',
             'alamat' => 'required',
             'no_tlp' => 'required',
+            'jabatan_id' => 'required',
         ]);
 
         $karyawan = Karyawan::findOrFail($id);
@@ -105,6 +112,7 @@ class KaryawanController extends Controller
         $karyawan->agama = $request->agama;
         $karyawan->alamat = $request->alamat;
         $karyawan->no_tlp = $request->no_tlp;
+        $karyawan->jabatan_id = $request->jabatan_id;
         $karyawan->save();
         return redirect()->route('karyawan.index');
     }
