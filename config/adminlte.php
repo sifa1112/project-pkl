@@ -241,9 +241,16 @@ return [
             'text' => 'search',
         ],
         [
+            'text' => 'Dashboard',
+            'url'  => 'admin/',
+            'icon'  => 'far fa-fw fa-file',
+        ],
+        [
             'text' => 'Data Karyawan',
             'url'  => 'admin/karyawan',
             'icon'  => 'far fa-fw fa-file',
+            'label-color' => 'succes',
+            'can' => ['AksesAdmin','AksesKaryawan'],
         ],
         [
             'text' => 'Data Jabatan',
@@ -260,7 +267,7 @@ return [
             'url'  => 'admin/absen',
             'icon'  => 'far fa-fw fa-file',
         ],
-        
+
     ],
 
     /*

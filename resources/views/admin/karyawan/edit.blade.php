@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-Dashboard 
+Dashboard
 
 @stop
 
@@ -14,7 +14,7 @@ Dashboard
         <div class="row">
             <div class="col">
                 <div class="card">
-                    <div class="card-header">Edit Book</div>
+                    <div class="card-header">Edit Data Karyawan</div>
                     <div class="card-body">
                         <form action="{{ route('karyawan.update', $karyawan->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -43,8 +43,11 @@ Dashboard
                             </div>
                             <div class="form-group">
                                 <label for="">Jenis Kelamin</label>
-                                <input type="text" name="jk"  value="{{ $karyawan->jk }}"
-                                    class="form-control @error('jk') is-invalid @enderror">
+                                <input type="radio" name="jk" value="laki-laki">Laki-laki</b>
+                                <input type="radio" name="jk" value="perempuan">Perempuan
+
+                                    </input>
+                                    <class="form-control @error('jk') is-invalid @enderror">
                                 @error('jk')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -53,8 +56,13 @@ Dashboard
                             </div>
                             <div class="form-group">
                                 <label for="">Agama</label>
-                                <input type="text" name="agama"  value="{{ $karyawan->agama }}"
-                                    class="form-control @error('agama') is-invalid @enderror">
+                                <select name="agama">
+                                <option value="islam">Islam</option>
+                                <option value="kristen">Kristen</option>
+                                <option value="budha">Budha</option>
+                                <option value="hindu">Hindu</option>
+                                </select>
+                                    <class="form-control @error('agama') is-invalid @enderror">
                                 @error('agama')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -84,7 +92,7 @@ Dashboard
                             <div class="form-group">
                                 <label for="">Jabatan</label>
                                 <select name="jabatan_id" class="form-control @error('jabatan_id') is-invalis @enderror">
-                                    <option value="">Pilih Penulis</option>
+                                    <option value="">Data jabatan</option>
                                     @foreach ($jabatan as $data)
                                         <option value="{{ $data->id }}"
                                         {{ $data->id == $karyawan->jabatan_id ? 'selected="selected"' : '' }}>

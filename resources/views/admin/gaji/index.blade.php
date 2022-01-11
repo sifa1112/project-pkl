@@ -4,9 +4,9 @@
 
 @section('content_header')
 
-Dashboard 
+Dashboard
 
-@stop
+@endsection
 
 @section('content')
 @include('layouts._flash')
@@ -22,23 +22,32 @@ Dashboard
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
+                                <table class="table" id="gaji">
+                                    <thead>
                                 <tr>
                                     <th>Nomor</th>
-                                    <th>Gaji Pokok</th>
-                                    <th>Tunjangan</th>
                                     <th>Nama Karyawan</th>
                                     <th>Jabatan</th>
+                                    <th>Gaji Pokok</th>
+                                    <th>Tunjangan</th>
+                                    <th>Lembur</th>
+                                    <th>Potongan</th>
+                                    <th>Total</th>
                                     <th>Action</th>
-                                    
                                 </tr>
+                            </thead>
+                            <tbody>
                                 @php $no=1; @endphp
                                 @foreach ($gaji as $data)
                                     <tr>
                                         <td>{{ $no++ }}</td>
-                                        <td>Rp. {{ number_format($data->gaji_pokok) }}</td>
-                                        <td>{{ $data->tunjangan }}</td>
                                         <td>{{ $data->karyawan->nama_karyawan }}</td>
                                         <td>{{ $data->jabatan->nama_jabatan }}</td>
+                                        <td>Rp. {{ number_format($data->gaji_pokok) }}</td>
+                                        <td>Rp. {{ number_format($data->tunjangan) }}</td>
+                                        <td>Rp. {{ number_format ($data->lembur) }}</td>
+                                        <td>Rp. {{ number_format ($data->potongan) }}</td>
+                                        <td>Rp. {{ number_format ($data->total) }}</td>
                                         <td>
                                             <form action="{{ route('gaji.destroy', $data->id) }}" method="post">
                                                 @method('delete')
@@ -54,19 +63,26 @@ Dashboard
                                     </tr>
                                 @endforeach
                             </table>
+                        </tbody>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @stop
+    @endsection
 
-@section('css')
+    @section('css')
+    <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css')}}">
+    @endsection
 
-
-@stop
 
 @section('js')
+    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#gaji').DataTable();
+        });
+        </script>
+@endsection
 
-@stop

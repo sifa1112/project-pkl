@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Gaji extends Model
 {
     use HasFactory;
-    protected $fillable = ['gaji_pokok','tunjangan','karyawan_id','jabatan_id'];
+    protected $fillable = ['gaji_pokok','tunjangan','karyawan_id','jabatan_id','lembur','potongan','total'];
 
     public function karyawan()
     {

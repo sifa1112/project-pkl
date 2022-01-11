@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-Dashboard 
+Dashboard
 
 @stop
 
@@ -19,6 +19,38 @@ Dashboard
                         <form action="{{ route('gaji.update', $gaji->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('put')
+                            <div class="form-group">
+                                <label for="">Nama Karyawan</label>
+                                <select name="karyawan_id" class="form-control @error('karyawan_id') is-invalis @enderror">
+                                    <option value="">Nama Karyawan</option>
+                                    @foreach ($karyawan as $data)
+                                        <option value="{{ $data->id }}"
+                                        {{ $data->id == $gaji->karyawan_id ? 'selected="selected"' : '' }}>
+                                        {{$data->nama_karyawan}}</option>
+                                    @endforeach
+                                </select>
+                                @error('karyawan_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">Jabatan</label>
+                                <select name="jabatan_id" class="form-control @error('jabatan_id') is-invalis @enderror">
+                                    <option value="">Jabatan</option>
+                                    @foreach ($jabatan as $data)
+                                        <option value="{{ $data->id }}"
+                                        {{ $data->id == $gaji->jabatan_id ? 'selected="selected"' : '' }}>
+                                        {{$data->nama_jabatan}}</option>
+                                    @endforeach
+                                </select>
+                                @error('jabatan_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                             <div class="form-group">
                                 <label for="">Gaji Pokok</label>
                                 <input type="text" name="gaji_pokok" value="{{ $gaji->gaji_pokok }}" class="form-control
@@ -41,33 +73,35 @@ Dashboard
                                     </span>
                                 @enderror
                             </div>
+
                             <div class="form-group">
-                                <label for="">Nama Karyawan</label>
-                                <select name="karyawan_id" class="form-control @error('karyawan_id') is-invalis @enderror">
-                                    <option value="">Nama Karyawan</option>
-                                    @foreach ($karyawan as $data)
-                                        <option value="{{ $data->id }}"
-                                        {{ $data->id == $gaji->karyawan_id ? 'selected="selected"' : '' }}>
-                                        {{$data->nama_karyawan}}</option>
-                                    @endforeach
-                                </select>
-                                @error('karyawan_id')
+                                <label for="">Lembur</label>
+                                <input type="text" name="lembur" value="{{ $gaji->lembur }}" class="form-control
+                                    @error('lembur') is-invalid @enderror">
+
+                                @error('lembur')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">Jabatan</label>
-                                <select name="jabatan_id" class="form-control @error('jabatan_id') is-invalis @enderror">
-                                    <option value="">Pilih Jabatan</option>
-                                    @foreach ($jabatan as $data)
-                                        <option value="{{ $data->id }}"
-                                        {{ $data->id == $gaji->jabatan_id ? 'selected="selected"' : '' }}>
-                                        {{$data->nama_jabatan}}</option>
-                                    @endforeach
-                                </select>
-                                @error('jabatan_id')
+                                <label for="">Potongan</label>
+                                <input type="text" name="potongan" value="{{ $gaji->potongan }}" class="form-control
+                                    @error('potongan') is-invalid @enderror">
+
+                                @error('potongan')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">Total</label>
+                                <input type="text" name="total" value="{{ $gaji->total }}" class="form-control
+                                    @error('total') is-invalid @enderror">
+
+                                @error('total')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-Dashboard 
+Dashboard
 
 @stop
 
@@ -22,6 +22,8 @@ Dashboard
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
+                                <table class="table" id="karyawan">
+                                    <thead>
                                 <tr>
                                     <th>Nomor</th>
                                     <th>Nama Karyawan</th>
@@ -32,8 +34,10 @@ Dashboard
                                     <th>Nomor HP</th>
                                     <th>Jabatan</th>
                                     <th>Action</th>
-                                    
+
                                 </tr>
+                            </thead>
+                            <tbody>
                                 @php $no=1; @endphp
                                 @foreach ($karyawan as $data)
                                     <tr>
@@ -54,12 +58,13 @@ Dashboard
                                                 <a href="{{ route('karyawan.show', $data->id) }}"
                                                     class="btn btn-outline-warning">Show</a>
                                                 <button type="submit" class="btn btn-outline-danger"
-                                                    onclick="return confirm('Are you sure?');">Delete</button>
+                                                    onclick="return confirm('Are you sure for delete it?');">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
                                 @endforeach
-                            </table>
+                            </tbody>
+                        </table>
                         </div>
                     </div>
                 </div>
@@ -68,11 +73,16 @@ Dashboard
     </div>
     @stop
 
-@section('css')
+    @section('css')
+    <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css')}}">
+    @endsection
 
-
-@stop
 
 @section('js')
-
-@stop
+    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#karyawan').DataTable();
+        });
+        </script>
+@endsection

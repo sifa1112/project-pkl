@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-Dashboard 
+Dashboard
 
 @stop
 
@@ -43,7 +43,7 @@ Dashboard
                             <div class="form-group">
                                 <label for="">Jabatan</label>
                                 <br>
-                                <input type="text" name="" class="form-control" value="{{ $gaji->jabatan->nama_jabatan }}" readonly>                            </div>
+                                <input type="text" name="" class="form-control" value="{{ $karyawan->jabatan->nama_jabatan }}" readonly>                            </div>
                             <div class="form-group">
                                 <br>
                                 <a href="{{ url('admin/karyawan') }}" class="btn btn-block btn-outline-primary">Kembali</a>

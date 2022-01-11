@@ -4,9 +4,9 @@
 
 @section('content_header')
 
-Dashboard 
+Dashboard
 
-@stop
+@endsection
 
 @section('content')
 @include('layouts._flash')
@@ -30,7 +30,7 @@ Dashboard
                                     <th>Action</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <>
                                 @php $no=1; @endphp
                                 @foreach ($jabatan as $data)
                                     <tr>
@@ -51,7 +51,7 @@ Dashboard
                                         </td>
                                     </tr>
                                 @endforeach
-                                </tbody>
+
                             </table>
                         </div>
                     </div>
@@ -59,7 +59,7 @@ Dashboard
             </div>
         </div>
     </div>
-    @stop
+    @endsection
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css')}}">

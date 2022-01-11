@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-Dashboard 
+Dashboard
 
 @stop
 
@@ -19,9 +19,16 @@ Dashboard
                         <form action="{{ route('jabatan.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label for="">Nama Jabatan</label>
-                                <input type="text" name="nama_jabatan" class="form-control @error('nama_jabatan') is-invalid @enderror">
-                                @error('nama_jabatan')
+                                <label for="">Nama Jabatan</label><br>
+                                    <input type="radio" name="nama_jabatan" value="Direksi">Direksi<br>
+                                    <input type="radio" name="nama_jabatan" value="Direktur Utama">Direktur Utama<br>
+                                    <input type="radio" name="nama_jabatan" value="Direktur Keuangan">Direktur Keuangan<br>
+                                    <input type="radio" name="nama_jabatan" value="Direktur Personalia">Direktur Personalia<br>
+                                    <input type="radio" name="nama_jabatan" value="Manager">Manager<br>
+                                    <input type="radio" name="nama_jabatan" value="ADM">ADM<br>
+                                    <input type="radio" name="nama_jabatan" value="Divisi">Divisi<br>
+                                        </input>
+                              @error('nama_jabatan')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

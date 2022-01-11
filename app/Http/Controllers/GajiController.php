@@ -6,6 +6,8 @@ use App\Models\Gaji;
 use App\Models\Jabatan;
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
+use Session;
+
 
 class GajiController extends Controller
 {
@@ -42,17 +44,24 @@ class GajiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'karyawan_id' => 'required',
+            'jabatan_id' => 'required',
             'gaji_pokok' => 'required',
             'tunjangan' => 'required',
             'jabatan_id' => 'required',
-            'karyawan_id' => 'required',
+            'lembur' => 'required',
+            'potongan' => 'required',
+            // 'total' => 'required',
         ]);
 
         $gaji = new Gaji;
+        $gaji->karyawan_id = $request->karyawan_id;
+        $gaji->jabatan_id = $request->jabatan_id;
         $gaji->gaji_pokok = $request->gaji_pokok;
         $gaji->tunjangan = $request->tunjangan;
-        $gaji->jabatan_id = $request->jabatan_id;
-        $gaji->karyawan_id = $request->karyawan_id;
+        $gaji->lembur = $request->lembur;
+        $gaji->potongan = $request->potongan;
+        $gaji->total = $gaji->gaji_pokok + $gaji->tunjangan + $gaji->lembur - $gaji->potongan;
         $gaji->save();
         return redirect()->route('gaji.index');
     }
@@ -80,7 +89,7 @@ class GajiController extends Controller
         $gaji = Gaji::findOrFail($id);
         $jabatan = Jabatan::all();
         $karyawan = Karyawan::all();
-        return view('admin.karyawan.edit', compact('gaji', 'karyawan', 'jabatan'));
+        return view('admin.gaji.edit', compact('gaji', 'karyawan', 'jabatan'));
     }
 
     /**
@@ -93,17 +102,23 @@ class GajiController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'karyawan_id' => 'required',
+            'jabatan_id' => 'required',
             'gaji_pokok' => 'required',
             'tunjangan' => 'required',
-            'jabatan_id' => 'required',
-            'karyawan_id' => 'required',
+            'lembur' => 'required',
+            'potongan' => 'required',
+            // 'total' => 'required',
         ]);
 
         $gaji = Gaji::findOrFail($id);
+        $gaji->karyawan_id = $request->karyawan_id;
+        $gaji->jabatan_id = $request->jabatan_id;
         $gaji->gaji_pokok = $request->gaji_pokok;
         $gaji->tunjangan = $request->tunjangan;
-        $gaji->jabatan_id = $request->jabatan_id;
-        $gaji->karyawan_id = $request->karyawan_id;
+        $gaji->lembur = $request->lembur;
+        $gaji->potongan = $request->potongan;
+        $gaji->total = $gaji->gaji_pokok + $gaji->tunjangan + $gaji->lembur - $gaji->potongan;
         $gaji->save();
         return redirect()->route('gaji.index');
     }

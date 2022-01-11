@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-Dashboard 
+Dashboard
 
 @stop
 
@@ -16,6 +16,16 @@ Dashboard
                 <div class="card">
                     <div class="card-header">Data Karyawan</div>
                     <div class="card-body">
+                        <div class="form-group">
+                                <label for="">Nama Karyawan</label>
+                                <br>
+                                <input type="text" name="" class="form-control" value="{{ $gaji->karyawan->nama_karyawan }}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Jabatan</label>
+                                <br>
+                                <input type="text" name="" class="form-control" value="{{ $gaji->jabatan->nama_jabatan }}" readonly>
+                            </div>
                             <div class="form-group">
                                 <label for="">Gaji Pokok</label>
                                 <input type="text" name="gaji_pokok" value="{{ $gaji->gaji_pokok }}" class="form-control" readonly>
@@ -24,15 +34,19 @@ Dashboard
                                 <label for="">Tunjangan</label>
                                 <input type="text" name="tunjangan" value="{{ $gaji->tunjangan }}" class="form-control" readonly>
                             </div>
+
                             <div class="form-group">
-                                <label for="">Nama Karyawan</label>
-                                <br>
-                                <input type="text" name="" class="form-control" value="{{ $gaji->karyawan->nama_karyawan }}" readonly>
+                                <label for="">Lembur</label>
+                                <input type="text" name="lembur" value="{{ $gaji->lembur }}" class="form-control" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="">Jabatan</label>
-                                <br>
-                                <input type="text" name="" class="form-control" value="{{ $gaji->jabatan->nama_jabatan }}" readonly>                            </div>
+                                <label for="">Potongan</label>
+                                <input type="text" name="potongan" value="{{ $gaji->potongan }}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Total</label>
+                                <input type="text" name="total" value="{{ $gaji->total }}" class="form-control" readonly>
+                            </div>
                             <div class="form-group">
                                 <br>
                                 <a href="{{ url('admin/gaji') }}" class="btn btn-block btn-outline-primary">Kembali</a>

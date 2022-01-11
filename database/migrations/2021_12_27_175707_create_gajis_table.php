@@ -16,11 +16,14 @@ class CreateGajisTable extends Migration
         Schema::create('gajis', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('gaji_pokok');
-            $table->bigInteger('tunjangan'); 
+            $table->bigInteger('tunjangan');
             $table->bigInteger('karyawan_id')->unsigned();
-            $table->foreign('karyawan_id')->references('id')->on('karyawans');  
+            $table->foreign('karyawan_id')->references('id')->on('karyawans');
             $table->bigInteger('jabatan_id')->unsigned();
-            $table->foreign('jabatan_id')->references('id')->on('jabatans'); 
+            $table->foreign('jabatan_id')->references('id')->on('jabatans');
+            $table->bigInteger('lembur');
+            $table->bigInteger('potongan');
+            $table->bigInteger('total')->nullable();
             $table->timestamps();
         });
     }

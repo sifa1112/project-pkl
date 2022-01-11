@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-Dashboard 
+Dashboard
 
 @stop
 
@@ -19,27 +19,8 @@ Dashboard
                         <form action="{{ route('gaji.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label for="">Gaji Pokok</label>
-                                <input type="text" name="gaji_pokok" class="form-control @error('gaji_pokok') is-invalid @enderror">
-                                @error('gaji_pokok')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="">Tunjangan</label>
-                                <input type="text" name="tunjangan" class="form-control @error('tunjangan') is-invalid @enderror">
-                                @error('tunjangan')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
                                 <label for="">Nama Karyawan</label>
                                 <select name="karyawan_id" class="form-control @error('karyawan_id') is-invalid @enderror">
-                                    <option value="">Nama Karyawan</option>
                                     @foreach ($karyawan as $data)
                                         <option value="{{ $data->id }}">{{ $data->nama_karyawan }}</option>
                                     @endforeach
@@ -64,6 +45,52 @@ Dashboard
                                     </span>
                                 @enderror
                             </div>
+                            <div class="form-group">
+                                <label for="">Gaji Pokok</label>
+                                <input type="text" name="gaji_pokok" class="form-control @error('gaji_pokok') is-invalid @enderror">
+                                @error('gaji_pokok')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">Tunjangan</label>
+                                <input type="text" name="tunjangan" class="form-control @error('tunjangan') is-invalid @enderror">
+                                @error('tunjangan')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Lembur</label>
+                                <input type="text" name="lembur" class="form-control @error('lembur') is-invalid @enderror">
+                                @error('lembur')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">Potongan</label>
+                                <input type="text" name="potongan" class="form-control @error('potongan') is-invalid @enderror">
+                                @error('potongan')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            {{-- </div>
+                            <div class="form-group">
+                                <label for="">Total</label>
+                                <input type="text" name="total" class="form-control @error('total') is-invalid @enderror">
+                                @error('total')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div> --}}
                             <div class="form-group">
                                 <button type="reset" class="btn btn-outline-warning">Reset</button>
                                 <button type="submit" class="btn btn-outline-primary">Save</button>

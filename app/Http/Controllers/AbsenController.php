@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absen;
+use App\Models\Karyawan;
 use Illuminate\Http\Request;
 
 class AbsenController extends Controller
@@ -14,7 +15,8 @@ class AbsenController extends Controller
      */
     public function index()
     {
-        //
+        $absen = Absen::with('karyawan')->get();
+        return view('admin.absen.index', compact('absen'));
     }
 
     /**
@@ -24,7 +26,8 @@ class AbsenController extends Controller
      */
     public function create()
     {
-        //
+        $karyawan = Karyawan::all();
+        return view('admin.absen.create', compact('karyawan'));
     }
 
     /**
@@ -35,7 +38,18 @@ class AbsenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_karyawan' => 'required',
+            'tanggal' => 'required',
+            'status_absen' => 'required',
+        ]);
+
+        $absen = new Absen;
+        $absen->nama_karyawan = $request->nama_karyawan;
+        $absen->tanggal = $request->tanggal;
+        $absen->status_absen = $request->status_absen;
+        $absen->save();
+        return redirect()->route('absen.index');
     }
 
     /**
@@ -44,9 +58,10 @@ class AbsenController extends Controller
      * @param  \App\Models\Absen  $absen
      * @return \Illuminate\Http\Response
      */
-    public function show(Absen $absen)
+    public function show($id)
     {
-        //
+        $absen = Absen::findOrFail($id);
+        return view('admin.absen.show', compact('absen'));
     }
 
     /**
@@ -55,9 +70,11 @@ class AbsenController extends Controller
      * @param  \App\Models\Absen  $absen
      * @return \Illuminate\Http\Response
      */
-    public function edit(Absen $absen)
+    public function edit($id)
     {
-        //
+        $absen = Absen::findOrFail($id);
+        $karyawan = Karyawan::all();
+        return view('admin.absen.edit', compact('absen', 'karyawan'));
     }
 
     /**
@@ -67,9 +84,20 @@ class AbsenController extends Controller
      * @param  \App\Models\Absen  $absen
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Absen $absen)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_karyawan' => 'required',
+            'tanggal' => 'required',
+            'status_absen' => 'required',
+        ]);
+
+        $absen = Absen::findOrFail($id);
+        $absen->nama_karyawan = $request->nama_karyawan;
+        $absen->tanggal = $request->tanggal;
+        $absen->status_absen = $request->status_absen;
+        $absen->save();
+        return redirect()->route('absen.index');
     }
 
     /**
@@ -78,8 +106,10 @@ class AbsenController extends Controller
      * @param  \App\Models\Absen  $absen
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Absen $absen)
+    public function destroy($id)
     {
-        //
+        $absen = Absen::findOrFail($id);
+        $absen->delete();
+        return redirect()->route('absen.index');
     }
 }

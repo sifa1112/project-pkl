@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-Dashboard 
+Dashboard
 
 @stop
 
@@ -38,7 +38,10 @@ Dashboard
                             </div>
                             <div class="form-group">
                                 <label for="">Jenis Kelamin</label>
-                                <input type="text" name="jk" class="form-control @error('jk') is-invalid @enderror">
+                                <input type="radio" name="jk" value="laki-laki">Laki-laki</b>
+                                <input type="radio" name="jk" value="perempuan">Perempuan
+
+                                    </input>
                                 @error('jk')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -47,7 +50,12 @@ Dashboard
                             </div>
                             <div class="form-group">
                                 <label for="">Agama</label>
-                                <input type="text" name="agama" class="form-control @error('agama') is-invalid @enderror">
+                                <select name="agama">
+                                <option value="islam">Islam</option>
+                                <option value="kristen">Kristen</option>
+                                <option value="budha">Budha</option>
+                                <option value="hindu">Hindu</option>
+                                </select>
                                 @error('agama')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
