@@ -46,6 +46,10 @@ class JabatanController extends Controller
         $jabatan->nama_jabatan = $request->nama_jabatan;
         $jabatan->gaji_pokok = $request->gaji_pokok;
         $jabatan->save();
+        Session::flash("flash_notification", [
+            "level" => "success",
+            "massege" => "Berhasil Menyimpan $jabatan->nama_jabatan",
+        ]);
         return redirect()->route('jabatan.index');
     }
 

@@ -17,9 +17,9 @@ class JabatanController extends Controller
     {
         $jabatan = Jabatan::all();
         return response()->json([
-            'success'=>true,
-            'message'=>'Data Jabatan',
-            'data'=>$jabatan,
+            'success' => true,
+            'message' => 'Data Jabatan',
+            'data' => $jabatan,
         ], 200);
     }
 
@@ -41,7 +41,15 @@ class JabatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $jabatan = new Jabatan();
+        $jabatan->nama_jabatan = $request->nama_jabatan;
+        $jabatan->gaji_pokok = $request->gaji_pokok;
+        $jabatan->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Jabatan berhasil dibuat',
+            'data' => $jabatan,
+        ], 201);
     }
 
     /**
@@ -52,7 +60,12 @@ class JabatanController extends Controller
      */
     public function show($id)
     {
-        //
+        $jabatan = Jabatan::findOrFail($id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Show Data Jabatan',
+            'data' => $jabatan,
+        ], 200);
     }
 
     /**
@@ -75,17 +88,25 @@ class JabatanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $jabatan = new Jabatan();
+        $jabatan->nama_jabatan = $request->nama_jabatan;
+        $jabatan->gaji_pokok = $request->gaji_pokok;
+        $jabatan->save();
+        return responses()->json([
+            'success' => true,
+            'message' => 'Data Jabatan berhasil diedit',
+            'data' => $jabatan,
+        ], 201);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $jabatan = Jabatan::findOrFail($id);
+        $jabatan->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Jabatan Berhasil dihapus',
+            'data' => $jabatan,
+        ], 200);
     }
 }

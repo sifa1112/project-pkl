@@ -30,7 +30,7 @@ Dashboard
                                     <th>Action</th>
                                 </tr>
                                 </thead>
-                                <>
+                                <tbody>
                                 @php $no=1; @endphp
                                 @foreach ($jabatan as $data)
                                     <tr>

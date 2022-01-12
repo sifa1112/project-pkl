@@ -243,29 +243,29 @@ return [
         [
             'text' => 'Dashboard',
             'url'  => 'admin/',
-            'icon'  => 'far fa-fw fa-file',
-        ],
-        [
-            'text' => 'Data Karyawan',
-            'url'  => 'admin/karyawan',
-            'icon'  => 'far fa-fw fa-file',
-            'label-color' => 'succes',
-            'can' => ['AksesAdmin','AksesKaryawan'],
+            'icon'  => 'fas fa-fw fa-file',
         ],
         [
             'text' => 'Data Jabatan',
             'url'  => 'admin/jabatan',
-            'icon'  => 'far fa-fw fa-file',
+            'icon'  => 'fas fa-fw fa-file',
+        ],
+        [
+            'text' => 'Data Karyawan',
+            'url'  => 'admin/karyawan',
+            'icon'  => 'fas fa-fw fa-file',
+            'label-color' => 'succes',
+            'can' => ['AksesAdmin','AksesKaryawan'],
         ],
         [
             'text' => 'Data Gaji',
             'url'  => 'admin/gaji',
-            'icon'  => 'far fa-fw fa-file',
+            'icon'  => 'fas fa-fw fa-file',
         ],
         [
             'text' => 'Data Absen',
             'url'  => 'admin/absen',
-            'icon'  => 'far fa-fw fa-file',
+            'icon'  => 'fas fa-fw fa-file',
         ],
 
     ],
