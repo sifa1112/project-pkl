@@ -6,8 +6,6 @@ use App\Models\Gaji;
 use App\Models\Jabatan;
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
-use Session;
-
 
 class GajiController extends Controller
 {
@@ -20,6 +18,12 @@ class GajiController extends Controller
     {
         $gaji = Gaji::with('jabatan', 'karyawan')->get();
         return view('admin.gaji.index', compact('gaji'));
+    }
+
+    public function laporan()
+    {
+        $laporan = Gaji::all();
+        return view('admin.gaji.laporan', compact('laporan'));
     }
 
     /**
@@ -46,10 +50,10 @@ class GajiController extends Controller
         $request->validate([
             'karyawan_id' => 'required',
             'jabatan_id' => 'required',
-            'gaji_pokok' => 'required',
+            //'gaji_pokok' => 'required',
             'tunjangan' => 'required',
-            'jabatan_id' => 'required',
-            'lembur' => 'required',
+            //'jabatan_id' => 'required',
+            // 'lembur' => 'required',
             'potongan' => 'required',
             // 'total' => 'required',
         ]);
@@ -57,12 +61,18 @@ class GajiController extends Controller
         $gaji = new Gaji;
         $gaji->karyawan_id = $request->karyawan_id;
         $gaji->jabatan_id = $request->jabatan_id;
-        $gaji->gaji_pokok = $request->gaji_pokok;
-        $gaji->tunjangan = $request->tunjangan;
-        $gaji->lembur = $request->lembur;
+        // $gaji->gaji_pokok = $request->gaji_pokok;
+        $gaji->tunjangan = Jabatan::findOrFail($request->jabatan_id)->tunjangan;
+        // $gaji->lembur = $request->lembur;
         $gaji->potongan = $request->potongan;
-        $gaji->total = $gaji->gaji_pokok + $gaji->tunjangan + $gaji->lembur - $gaji->potongan;
+        $gaji->total = $gaji->jabatan->gaji_pokok + $gaji->jabatan->tunjangan - $gaji->potongan;
         $gaji->save();
+        Alert::success('Success', 'Berhasil Menmbahkan Data Gaji');
+        // Session::flash("flash_notification", [
+        //     "level" => "success",
+        //     "message" => "Berhasil Menyimpan  $gaji->karyawan_id  ",
+        // ]);
+
         return redirect()->route('gaji.index');
     }
 
@@ -106,7 +116,7 @@ class GajiController extends Controller
             'jabatan_id' => 'required',
             'gaji_pokok' => 'required',
             'tunjangan' => 'required',
-            'lembur' => 'required',
+            // 'lembur' => 'required',
             'potongan' => 'required',
             // 'total' => 'required',
         ]);
@@ -116,9 +126,9 @@ class GajiController extends Controller
         $gaji->jabatan_id = $request->jabatan_id;
         $gaji->gaji_pokok = $request->gaji_pokok;
         $gaji->tunjangan = $request->tunjangan;
-        $gaji->lembur = $request->lembur;
+        // $gaji->lembur = $request->lembur;
         $gaji->potongan = $request->potongan;
-        $gaji->total = $gaji->gaji_pokok + $gaji->tunjangan + $gaji->lembur - $gaji->potongan;
+        $gaji->total = $gaji->gaji_pokok + $gaji->jabatan->tunjangan - $gaji->potongan;
         $gaji->save();
         return redirect()->route('gaji.index');
     }
@@ -134,5 +144,6 @@ class GajiController extends Controller
         $gaji = Gaji::findOrFail($id);
         $gaji->delete();
         return redirect()->route('gaji.index');
+
     }
 }

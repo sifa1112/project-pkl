@@ -58,6 +58,11 @@ class KaryawanController extends Controller
         $karyawan->no_tlp = $request->no_tlp;
         $karyawan->jabatan_id = $request->jabatan_id;
         $karyawan->save();
+        // Session::flash("flash_notification", [
+        //     "level" => "success",
+        //     "message" => "Berhasil Menyimpan  $karyawan->nama_karyawan",
+        // ]);
+
         return redirect()->route('karyawan.index');
     }
 
@@ -128,5 +133,6 @@ class KaryawanController extends Controller
         $karyawan = Karyawan::findOrFail($id);
         $karyawan->delete();
         return redirect()->route('karyawan.index');
+
     }
 }

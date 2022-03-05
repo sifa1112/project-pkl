@@ -17,6 +17,7 @@ class CreateJabatansTable extends Migration
             $table->id();
             $table->string('nama_jabatan');
             $table->bigInteger('gaji_pokok');
+            $table->bigInteger('tunjangan');
             $table->timestamps();
         });
     }

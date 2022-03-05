@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Jabatan extends Model
 {
     use HasFactory;
-    protected $visible = ['nama_jabatan', 'gaji_pokok'];
-    protected $fillable = ['nama_jabatan', 'gaji_pokok'];
+    protected $visible = ['nama_jabatan', 'gaji_pokok', 'tunjangan'];
+    protected $fillable = ['nama_jabatan', 'gaji_pokok', 'tunjangan'];
     public $timestamp = true;
 
     /*
@@ -21,5 +21,11 @@ class Jabatan extends Model
     public function karyawan()
     {
         return $this->hasMany('App\Models\Karyawan', 'id_jabatan');
+    }
+    public function gaji()
+    {
+        //data model "gaji" bisa memiliki banyak data
+        //data model "jabatan" melalui fk "jabatan_id"
+        return $this->hasMany('App\Models\Gaji', 'jabatan_id');
     }
 }

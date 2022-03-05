@@ -4,12 +4,11 @@
 
 @section('content_header')
 
-Dashboard
 
 @stop
 
 @section('content')
-@include('layouts._flash')
+    @include('layouts._flash')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -46,15 +45,21 @@ Dashboard
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">Gaji Pokok</label>
-                                <input type="text" name="gaji_pokok" class="form-control @error('gaji_pokok') is-invalid @enderror">
-                                @error('gaji_pokok')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="">Gaji Pokok</label>
+                                    <select name="jabatan_id"
+                                        class="form-control @error('jabatan_id') is-invalid @enderror">
+                                        @foreach ($jabatan as $data)
+                                            <option value="{{ $data->id }}">{{ $data->gaji_pokok }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('jabatan_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                {{-- <div class="form-group">
                                 <label for="">Tunjangan</label>
                                 <input type="text" name="tunjangan" class="form-control @error('tunjangan') is-invalid @enderror">
                                 @error('tunjangan')
@@ -62,9 +67,9 @@ Dashboard
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            </div> --}}
 
-                            <div class="form-group">
+                                {{-- <div class="form-group">
                                 <label for="">Lembur</label>
                                 <input type="text" name="lembur" class="form-control @error('lembur') is-invalid @enderror">
                                 @error('lembur')
@@ -72,16 +77,19 @@ Dashboard
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="">Potongan</label>
-                                <input type="text" name="potongan" class="form-control @error('potongan') is-invalid @enderror">
-                                @error('potongan')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            {{-- </div>
+                            </div> --}}
+                                <div class="form-group">
+                                    <label for="">Potongan</label><br>
+                                    <input type="radio" name="potongan" value="BPJS Kesehatan">BPJS Kesehatan</br>
+                                    <input type="radio" name="potongan" value="JHT">JHT</br>
+                                    <input type="radio" name="potongan" value="Jaminan Pensiun">Jaminan Pensiun</br>
+                                    </input>
+                                    @error('potongan')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    {{-- </div>
                             <div class="form-group">
                                 <label for="">Total</label>
                                 <input type="text" name="total" class="form-control @error('total') is-invalid @enderror">
@@ -91,17 +99,17 @@ Dashboard
                                     </span>
                                 @enderror
                             </div> --}}
-                            <div class="form-group">
-                                <button type="reset" class="btn btn-outline-warning">Reset</button>
-                                <button type="submit" class="btn btn-outline-primary">Save</button>
-                            </div>
+                                    <div class="form-group">
+                                        <button type="reset" class="btn btn-outline-warning">Reset</button>
+                                        <button type="submit" class="btn btn-outline-primary">Save</button>
+                                    </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @stop
+@stop
 
 @section('css')
 

@@ -35512,9 +35512,9 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
 
 .dark-mode .login-card-body,
 .dark-mode .register-card-body {
-  background-color: #343a40;
-  border-color: #6c757d;
-  color: #fff;
+  background-color: blue;
+  border-color: blue;
+  color: blue;
 }
 
 .dark-mode .login-logo a,

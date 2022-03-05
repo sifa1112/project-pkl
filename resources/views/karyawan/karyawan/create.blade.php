@@ -4,10 +4,12 @@
 
 @section('content_header')
 
+Dashboard
+
 @stop
 
 @section('content')
-    @include('layouts._flash')
+@include('layouts._flash')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -18,9 +20,61 @@
                             @csrf
                             <div class="form-group">
                                 <label for="">Nama Karyawan</label>
-                                <input type="text" name="nama_karyawan"
-                                    class="form-control @error('nama_karyawan') is-invalid @enderror">
+                                <input type="text" name="nama_karyawan" class="form-control @error('nama_karyawan') is-invalid @enderror">
                                 @error('nama_karyawan')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">Tempat & Tanggal Lahir</label>
+                                <input type="date" name="ttl" class="form-control @error('ttl') is-invalid @enderror">
+                                @error('ttl')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">Jenis Kelamin</label>
+                                <input type="radio" name="jk" value="Laki-Laki">Laki-laki</b>
+                                <input type="radio" name="jk" value="Perempuan">Perempuan
+
+                                    </input>
+                                @error('jk')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">Agama</label>
+                                <select name="agama">
+                                <option value="islam">Islam</option>
+                                <option value="kristen">Kristen</option>
+                                <option value="budha">Budha</option>
+                                <option value="hindu">Hindu</option>
+                                </select>
+                                @error('agama')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">Alamat</label>
+                                <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror">
+                                @error('alamat')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">Nomor HP</label>
+                                <input type="text" name="no_tlp" class="form-control @error('no_tlp') is-invalid @enderror">
+                                @error('no_tlp')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -41,65 +95,6 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">Tempat & Tanggal Lahir</label>
-                                <input type="date" name="ttl" class="form-control @error('ttl') is-invalid @enderror">
-                                @error('ttl')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="">Jenis Kelamin</label><br>
-                                <input type="radio" name="jk" value="Laki-Laki">Laki-laki</b>
-                                <input type="radio" name="jk" value="Perempuan">Perempuan
-
-                                </input>
-                                @error('jk')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="">Agama</label><br>
-                                <input type="radio" name="agama" value="Islam">Islam</b>
-                                <input type="radio" name="agama" value="Protestan">Protestan</b>
-                                <input type="radio" name="agama" value="Katolik">Katolik</b>
-                                <input type="radio" name="agama" value="Hindu">Hindu</b>
-                                <input type="radio" name="agama" value="Bundha">Bundha</b>
-                                <input type="radio" name="agama" value="Khonghucu">Khonghucu</b>
-                                <input type="radio" name="agama" value="Tidak Ada">Tidak Ada
-
-                                </input>
-                                @error('agama')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="">Alamat</label>
-                                <textarea name="alamat" class="form-control"></textarea> @error('alamat') is-invalid
-                                @enderror
-                                @error('alamat')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="">Nomor HP</label>
-                                <input type="number" name="no_tlp"
-                                    class="form-control @error('no_tlp') is-invalid @enderror">
-                                @error('no_tlp')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
                                 <button type="reset" class="btn btn-outline-warning">Reset</button>
                                 <button type="submit" class="btn btn-outline-primary">Save</button>
                             </div>
@@ -109,7 +104,7 @@
             </div>
         </div>
     </div>
-@stop
+    @stop
 
 @section('css')
 

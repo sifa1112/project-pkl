@@ -23,7 +23,7 @@ class CreateKaryawansTable extends Migration
             $table->string('no_tlp');
             $table->bigInteger('jabatan_id')->unsigned();
             $table->foreign('jabatan_id')->references('id')->on('jabatans');
-            $table->timestamps ();
+            $table->timestamps();
         });
     }
 

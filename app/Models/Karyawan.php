@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Karyawan extends Model
 {
     use HasFactory;
-    protected $fillable = ['nama', 'ttl', 'jk', 'agama', 'no_tlp', 'jabatan_id'];
+    protected $visible = ['nama', 'ttl', 'jk', 'agama', 'no_tlp', 'jabatan_id'];
+
+    //memberikan akses dat apa saja yang bisa diisi
+    protected $fillable = ['nama', 'ttl', 'jk', 'agama', 'alamat', 'no_hp', 'jabatan_id'];
 
     public function jabatan()
     {

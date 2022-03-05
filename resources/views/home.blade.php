@@ -4,14 +4,15 @@
 
 @section('content_header')
 
-Dashboard
+
 
 @stop
 
 @section('content')
-
-Welcome to this beautiful admin panel
-
+<center>
+ {{-- <marquee><h1>𝓦𝓮𝓵𝓬𝓸𝓶𝓮 𝓣𝓸 𝓚𝓱𝓪𝓻𝓲𝓼𝓶𝓪 𝓕𝓲𝓷𝓪𝓷𝓬𝓮</h1></marquee> --}}
+ <img src="1.jpg" style="width:100%"/>
+</center>
 @stop
 
 @section('css')

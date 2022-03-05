@@ -4,24 +4,24 @@
 
 @section('content_header')
 
-Dashboard
-
 @stop
 
 @section('content')
-@include('layouts._flash')
+    @include('layouts._flash')
     <div class="container">
         <div class="row">
             <div class="col">
                 <div class="card">
                     <div class="card-header">Edit Data Karyawan</div>
                     <div class="card-body">
-                        <form action="{{ route('karyawan.update', $karyawan->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('karyawan.update', $karyawan->id) }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('put')
                             <div class="form-group">
                                 <label for="">Nama Karyawan</label>
-                                <input type="text" name="nama_karyawan" value="{{ $karyawan->nama_karyawan }}" class="form-control
+                                <input type="text" name="nama_karyawan" value="{{ $karyawan->nama_karyawan }}"
+                                    class="form-control
                                     @error('nama_karyawan') is-invalid @enderror">
 
                                 @error('nama_karyawan')
@@ -31,8 +31,25 @@ Dashboard
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label for="">Jabatan</label>
+                                <select name="jabatan_id" class="form-control @error('jabatan_id') is-invalis @enderror">
+                                    <option value="">Data jabatan</option>
+                                    @foreach ($jabatan as $data)
+                                        <option value="{{ $data->id }}"
+                                            {{ $data->id == $karyawan->jabatan_id ? 'selected="selected"' : '' }}>
+                                            {{ $data->nama_jabatan }}</option>
+                                    @endforeach
+                                </select>
+                                @error('jabatan_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="">Tempat & Tanggal Lahir</label>
-                                <input type="date" name="ttl" value="{{ $karyawan->ttl }}" class="form-control
+                                <input type="date" name="ttl" value="{{ $karyawan->ttl }}"
+                                    class="form-control
                                     @error('ttl') is-invalid @enderror">
 
                                 @error('ttl')
@@ -46,32 +63,35 @@ Dashboard
                                 <input type="radio" name="jk" value="laki-laki">Laki-laki</b>
                                 <input type="radio" name="jk" value="perempuan">Perempuan
 
-                                    </input>
-                                    <class="form-control @error('jk') is-invalid @enderror">
-                                @error('jk')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                </input>
+                                <class="form-control @error('jk') is-invalid @enderror">
+                                    @error('jk')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                             </div>
                             <div class="form-group">
                                 <label for="">Agama</label>
-                                <select name="agama">
-                                <option value="islam">Islam</option>
-                                <option value="kristen">Kristen</option>
-                                <option value="budha">Budha</option>
-                                <option value="hindu">Hindu</option>
-                                </select>
-                                    <class="form-control @error('agama') is-invalid @enderror">
-                                @error('agama')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input type="radio" name="agama" value="Islam">Islam</b>
+                                <input type="radio" name="agama" value="Protestan">Protestan</b>
+                                <input type="radio" name="agama" value="Katolik">Katolik</b>
+                                <input type="radio" name="agama" value="Hindu">Hindu</b>
+                                <input type="radio" name="agama" value="Bundha">Bundha</b>
+                                <input type="radio" name="agama" value="Khonghucu">Khonghucu</b>
+                                <input type="radio" name="agama" value="Tidak Ada">Tidak Ada
+
+                                </input>
+                                <class="form-control @error('agama') is-invalid @enderror">
+                                    @error('agama')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                             </div>
                             <div class="form-group">
                                 <label for="">Alamat</label>
-                                <input type="text" name="alamat"  value="{{ $karyawan->alamat }}"
+                                <input type="text" name="alamat" value="{{ $karyawan->alamat }}"
                                     class="form-control @error('alamat') is-invalid @enderror">
                                 @error('alamat')
                                     <span class="invalid-feedback" role="alert">
@@ -81,7 +101,7 @@ Dashboard
                             </div>
                             <div class="form-group">
                                 <label for="">Nomor HP</label>
-                                <input type="text" name="no_tlp"  value="{{ $karyawan->no_tlp }}"
+                                <input type="text" name="no_tlp" value="{{ $karyawan->no_tlp }}"
                                     class="form-control @error('no_tlp') is-invalid @enderror">
                                 @error('no_tlp')
                                     <span class="invalid-feedback" role="alert">
@@ -95,8 +115,8 @@ Dashboard
                                     <option value="">Data jabatan</option>
                                     @foreach ($jabatan as $data)
                                         <option value="{{ $data->id }}"
-                                        {{ $data->id == $karyawan->jabatan_id ? 'selected="selected"' : '' }}>
-                                        {{$data->nama_jabatan}}</option>
+                                            {{ $data->id == $karyawan->jabatan_id ? 'selected="selected"' : '' }}>
+                                            {{ $data->nama_jabatan }}</option>
                                     @endforeach
                                 </select>
                                 @error('jabatan_id')
@@ -116,7 +136,7 @@ Dashboard
             </div>
         </div>
     </div>
-    @stop
+@stop
 
 @section('css')
 
