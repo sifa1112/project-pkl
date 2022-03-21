@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Data Gaji')
 
 @section('content_header')
 
@@ -17,39 +17,20 @@
                         <form action="{{ route('gaji.update', $gaji->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('put')
-                            <div class="form-group">
-                                <label for="">Nama Karyawan</label>
-                                <select name="karyawan_id" class="form-control @error('karyawan_id') is-invalis @enderror">
-                                    <option value="">Nama Karyawan</option>
-                                    @foreach ($karyawan as $data)
-                                        <option value="{{ $data->id }}"
-                                            {{ $data->id == $gaji->karyawan_id ? 'selected="selected"' : '' }}>
-                                            {{ $data->nama_karyawan }}</option>
-                                    @endforeach
-                                </select>
-                                @error('karyawan_id')
+                            {{-- <div class="form-group">
+                                <label for="">Name</label>
+                                <input type="text" name="karyawan_id" value="{{ $karyawan->user->name }}"
+                                    class="form-control
+                                    @error('user') is-invalid @enderror">
+
+                                @error('user')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="">Jabatan</label>
-                                <select name="jabatan_id" class="form-control @error('jabatan_id') is-invalis @enderror">
-                                    <option value="">Jabatan</option>
-                                    @foreach ($jabatan as $data)
-                                        <option value="{{ $data->id }}"
-                                            {{ $data->id == $gaji->jabatan_id ? 'selected="selected"' : '' }}>
-                                            {{ $data->nama_jabatan }}</option>
-                                    @endforeach
-                                </select>
-                                @error('jabatan_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
+                            </div> --}}
+
+                            {{-- <div class="form-group">
                                 <label for="">Gaji Pokok</label>
                                 <select name="jabatan_id" class="form-control @error('jabatan_id') is-invalis @enderror">
                                     <option value="">Gaji Pokok</option>
@@ -64,7 +45,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            </div> --}}
                             {{-- <div class="form-group">
                                 <label for="">Gaji Pokok</label>
                                 <input type="text" name="gaji_pokok" value="{{ $gaji->gaji_pokok }}" class="form-control
@@ -76,7 +57,7 @@
                                     </span>
                                 @enderror
                             </div> --}}
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="">Tunjangan</label>
                                 <input type="text" name="tunjangan" value="{{ $gaji->tunjangan }}"
                                     class="form-control
@@ -87,7 +68,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                             {{-- <div class="form-group">
                                 <label for="">Lembur</label>
@@ -113,7 +94,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="">Total</label>
                                 <input type="text" name="total" value="{{ $gaji->total }}"
                                     class="form-control
@@ -124,7 +105,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <br>
                                 <button type="reset" class="btn btn-outline-warning">Reset</button>

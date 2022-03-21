@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Data Karyawan')
 
 @section('content_header')
 
@@ -18,9 +18,17 @@
                             @csrf
                             <div class="form-group">
                                 <label for="">Nama Karyawan</label>
-                                <input type="text" name="nama_karyawan"
-                                    class="form-control @error('nama_karyawan') is-invalid @enderror">
-                                @error('nama_karyawan')
+                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="text" name="email" class="form-control @error('email') is-invalid @enderror">
+                                @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -41,7 +49,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">Tempat & Tanggal Lahir</label>
+                                <label for="">Tanggal Lahir</label>
                                 <input type="date" name="ttl" class="form-control @error('ttl') is-invalid @enderror">
                                 @error('ttl')
                                     <span class="invalid-feedback" role="alert">

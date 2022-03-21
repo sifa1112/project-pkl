@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Data Gaji')
 
 @section('content_header')
 
@@ -15,9 +15,8 @@
                     <div class="card-header">Data Karyawan</div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="">Nama Karyawan</label>
-                            <br>
-                            <input type="text" name="" class="form-control" value="{{ $gaji->karyawan->nama_karyawan }}"
+                            <label for="">Name</label>
+                            <input type="text" name="name" value="{{ $karyawan->user->name }}" class="form-control"
                                 readonly>
                         </div>
                         <div class="form-group">

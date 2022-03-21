@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Gaji;
 use App\Models\Jabatan;
 use App\Models\Karyawan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Session;
 
 class GajiController extends Controller
 {
@@ -16,7 +18,7 @@ class GajiController extends Controller
      */
     public function index()
     {
-        $gaji = Gaji::with('jabatan', 'karyawan')->get();
+        $gaji = Gaji::with('jabatan', 'karyawan', 'user')->get();
         return view('admin.gaji.index', compact('gaji'));
     }
 
@@ -33,10 +35,12 @@ class GajiController extends Controller
      */
     public function create()
     {
-        //mengambil data author
+        //mengambil data
         $jabatan = Jabatan::all();
         $karyawan = Karyawan::all();
-        return view('admin.gaji.create', compact('jabatan', 'karyawan'));
+        $user = User::all();
+        // dd(Jabatan::findOrFail(2)->tunjangan);
+        return view('admin.gaji.create', compact('jabatan', 'karyawan', 'user'));
     }
 
     /**
@@ -48,30 +52,49 @@ class GajiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            // 'jabatan_id' => 'required',
+            // //'gaji_pokok' => 'required',
+            // 'tunjangan' => 'required',
+            // //'jabatan_id' => 'required',
+            // // 'lembur' => 'required',
             'karyawan_id' => 'required',
-            'jabatan_id' => 'required',
-            //'gaji_pokok' => 'required',
-            'tunjangan' => 'required',
-            //'jabatan_id' => 'required',
-            // 'lembur' => 'required',
             'potongan' => 'required',
             // 'total' => 'required',
         ]);
 
+        $potongan = 0;
+        if ($request->potongan == 'BPJS Kesehatan') {
+            $potongan = 50000;
+        } else if ($request->potongan == 'JHT') {
+            $potongan = 65000;
+        } else if ($request->potongan == 'Jaminan Pensiun') {
+            $potongan = 70000;
+        } else if ($request->potongan == 'Jaminan Pensiun' && 'BPJS Kesehatan') {
+            $potongan = 120000;
+        } else if ($request->potongan == 'Jaminan Pensiun' && 'JHT') {
+            $potongan = 135000;
+        } else if ($request->potongan == 'BPJS Kesehatan' && 'JHT') {
+            $potongan = 115000;
+        }
+
         $gaji = new Gaji;
         $gaji->karyawan_id = $request->karyawan_id;
-        $gaji->jabatan_id = $request->jabatan_id;
-        // $gaji->gaji_pokok = $request->gaji_pokok;
-        $gaji->tunjangan = Jabatan::findOrFail($request->jabatan_id)->tunjangan;
-        // $gaji->lembur = $request->lembur;
-        $gaji->potongan = $request->potongan;
-        $gaji->total = $gaji->jabatan->gaji_pokok + $gaji->jabatan->tunjangan - $gaji->potongan;
+        // $gaji->jabatan_id = $request->jabatan_id;
+        // $price = Jabatan::findOrFail($request->jabatan_id);
+        // $gaji->nama_jabatan = $price->nama_jabatan;
+        // $gaji->tunjangan = Jabatan::findOrFail($request->jabatan_id)->tunjangan;
+        $jabatan = Jabatan::findOrFail($request->karyawan_id);
+        $a = $jabatan->gaji_pokok + $jabatan->tunjangan;
+
+        $gaji->potongan = $potongan;
+
+        $gaji->total = $a - $gaji->potongan;
         $gaji->save();
-        Alert::success('Success', 'Berhasil Menmbahkan Data Gaji');
-        // Session::flash("flash_notification", [
-        //     "level" => "success",
-        //     "message" => "Berhasil Menyimpan  $gaji->karyawan_id  ",
-        // ]);
+        // dd($request->all());
+        Session::flash("flash_notification", [
+            "level" => "success",
+            "message" => "Berhasil Menyimpan  $gaji->karyawan_id  ",
+        ]);
 
         return redirect()->route('gaji.index');
     }
@@ -99,7 +122,8 @@ class GajiController extends Controller
         $gaji = Gaji::findOrFail($id);
         $jabatan = Jabatan::all();
         $karyawan = Karyawan::all();
-        return view('admin.gaji.edit', compact('gaji', 'karyawan', 'jabatan'));
+        $user = User::all();
+        return view('admin.gaji.edit', compact('gaji', 'karyawan', 'jabatan', 'user'));
     }
 
     /**
@@ -112,23 +136,30 @@ class GajiController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'karyawan_id' => 'required',
-            'jabatan_id' => 'required',
-            'gaji_pokok' => 'required',
-            'tunjangan' => 'required',
+            // 'karyawan_id' => 'required',
+            // 'jabatan_id' => 'required',
+            // 'gaji_pokok' => 'required',
+            // 'tunjangan' => 'required',
             // 'lembur' => 'required',
             'potongan' => 'required',
             // 'total' => 'required',
         ]);
 
+        $potongan = 0;
+        if ($request->potongan == 'BPJS Kesehatan') {
+            $potongan = 50000;
+        } else if ($request->potongan == 'JHT') {
+            $potongan = 65000;
+        } else if ($request->potongan == 'Jaminan Pensiun') {
+            $potongan = 70000;
+        }
+
         $gaji = Gaji::findOrFail($id);
         $gaji->karyawan_id = $request->karyawan_id;
-        $gaji->jabatan_id = $request->jabatan_id;
-        $gaji->gaji_pokok = $request->gaji_pokok;
-        $gaji->tunjangan = $request->tunjangan;
-        // $gaji->lembur = $request->lembur;
-        $gaji->potongan = $request->potongan;
-        $gaji->total = $gaji->gaji_pokok + $gaji->jabatan->tunjangan - $gaji->potongan;
+        $jabatan = Jabatan::findOrFail($request->karyawan_id);
+        $a = $jabatan->gaji_pokok + $jabatan->tunjangan;
+        $gaji->potongan = $potongan;
+        $gaji->total = $a - $gaji->potongan;
         $gaji->save();
         return redirect()->route('gaji.index');
     }

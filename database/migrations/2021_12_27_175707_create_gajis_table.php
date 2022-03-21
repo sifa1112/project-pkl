@@ -16,9 +16,7 @@ class CreateGajisTable extends Migration
         Schema::create('gajis', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('karyawan_id')->unsigned();
-            $table->foreign('karyawan_id')->references('id')->on('karyawans');
-            $table->bigInteger('jabatan_id')->unsigned();
-            $table->foreign('jabatan_id')->references('id')->on('jabatans');
+            $table->foreign('karyawan_id')->references('id')->on('users');
             $table->bigInteger('potongan');
             $table->bigInteger('total')->nullable();
             $table->timestamps();

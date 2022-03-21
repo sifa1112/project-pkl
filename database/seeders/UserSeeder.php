@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -36,11 +36,11 @@ class UserSeeder extends Seeder
         $admin->attachRole($adminRole);
 
         //membuat sample user
-        $karyawan = new User();
-        $karyawan->name = 'Karyawan User';
-        $karyawan->email = 'karyawan@gmail.com';
-        $karyawan->password = bcrypt('rahasia');
-        $karyawan->save();
-        $karyawan->attachRole($karyawanRole);
+        // $karyawan = new User();
+        // $karyawan->name = 'Karyawan User';
+        // $karyawan->email = 'karyawan@gmail.com';
+        // $karyawan->password = bcrypt('rahasia');
+        // $karyawan->save();
+        // $karyawan->attachRole($karyawanRole);
     }
 }

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Data Gaji')
 
 @section('content_header')
 
@@ -31,7 +31,6 @@
                                             <th>Jabatan</th>
                                             <th>Gaji Pokok</th>
                                             <th>Tunjangan</th>
-                                            {{-- <th>Lembur</th> --}}
                                             <th>Potongan</th>
                                             <th>Total</th>
                                             <th>Action</th>
@@ -42,24 +41,31 @@
                                         @foreach ($gaji as $data)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
-                                                <td>{{ $data->karyawan->nama_karyawan }}</td>
-                                                <td>{{ $data->jabatan->nama_jabatan }}</td>
-                                                {{-- <td>Rp. {{ number_format ($data->jabatan->gaji_pokok) }}</td> --}}
-                                                <td>Rp. {{ number_format($data->gaji_pokok) }}</td>
+                                                <td>{{ $data->karyawan->user->name }}</td>
+                                                <td>{{ $data->karyawan->jabatan->nama_jabatan }}</td>
+                                                <td>Rp. {{ number_format($data->karyawan->jabatan->gaji_pokok) }}</td>
                                                 <td>Rp. {{ number_format($data->karyawan->jabatan->tunjangan) }}</td>
-                                                {{-- <td>Rp. {{ number_format ($data->lembur) }}</td> --}}
+                                                {{-- <td>{{ $data->jabatan->nama_jabatan }}</td> --}}
+                                                {{-- <td>Rp. {{ number_format ($data->jabatan->gaji_pokok) }}</td> --}}
+                                                {{-- <td>Rp. {{ number_format($data->gaji_pokok) }}</td> --}}
+                                                {{-- <td>Rp. {{ number_format($data->jabatan->tunjangan) }}</td> --}}
                                                 <td>Rp. {{ number_format($data->potongan) }}</td>
-                                                <td>Rp. {{ number_format($data->total) }}</td>
+                                                <td>Rp.
+                                                    {{ number_format($data->total) }}
+                                                </td>
+                                                {{-- <td>Rp.
+                                                    {{ number_format($data->jabatan->gaji_pokok + $data->jabatan->tunjangan - $data->potongan) }}
+                                                </td> --}}
                                                 <td>
                                                     <form action="{{ route('gaji.destroy', $data->id) }}" method="post">
                                                         @method('delete')
                                                         @csrf
-                                                        @role('admin')
+                                                        {{-- @role('admin')
                                                             <a href="{{ route('gaji.edit', $data->id) }}"
                                                                 class="btn btn-outline-info">Edit</a>
-                                                        @endrole
-                                                        <a href="{{ route('gaji.show', $data->id) }}"
-                                                            class="btn btn-outline-warning">Show</a>
+                                                        @endrole --}}
+                                                        {{-- <a href="{{ route('gaji.show', $data->id) }}"
+                                                            class="btn btn-outline-warning">Show</a> --}}
                                                         @role('admin')
                                                             <button type="submit" class="btn btn-outline-danger"
                                                                 onclick="return confirm('Are you sure?');">Delete</button>

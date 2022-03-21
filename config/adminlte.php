@@ -237,10 +237,7 @@ return [
         ],
 
         // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
+
         // [
         //     'text' => 'Management User',
         //     'url' => 'admin/users',
@@ -281,10 +278,10 @@ return [
             'can' => ['AksesAdmin', 'AksesKaryawan'],
         ],
         [
-            'text'    => 'Laporan Gaji',
-            'icon'    => 'fa fa-th-list',
-            'can' => ['AksesAdmin','AksesKaryawan'],
-            'url'     => 'admin/laporan',
+            'text' => 'Laporan Gaji',
+            'icon' => 'fa fa-th-list',
+            'can' => ['AksesAdmin', 'AksesKaryawan'],
+            'url' => 'admin/laporan',
         ],
         //      [
         //     'text'  => 'Cetak Gaji',

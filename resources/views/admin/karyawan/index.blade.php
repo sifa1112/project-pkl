@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Data Karyawan')
 
 @section('content_header')
 
@@ -8,7 +8,7 @@
 
 @section('content')
     @include('layouts._flash')
-    <div class="container">
+    <div class="cont    ainer">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
@@ -26,9 +26,10 @@
                                     <thead>
                                         <tr>
                                             <th>Nomor</th>
-                                            <th>Nama Karyawan</th>
+                                            <th>Nama</th>
+                                            <th>Email</th>
                                             <th>Jabatan</th>
-                                            <th>Tempat & Tanggal Lahir</th>
+                                            <th>Tanggal Lahir</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Agama</th>
                                             <th>Alamat</th>
@@ -42,9 +43,9 @@
                                         @foreach ($karyawan as $data)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
-                                                <td>{{ $data->nama_karyawan }}</td>
+                                                <td>{{ $data->user->name }}</td>
+                                                <td>{{ $data->user->email }}</td>
                                                 <td>{{ $data->jabatan->nama_jabatan }}</td>
-
                                                 <td>{{ $data->ttl }}</td>
                                                 <td>{{ $data->jk }}</td>
                                                 <td>{{ $data->agama }}</td>
@@ -52,15 +53,12 @@
                                                 <td>{{ $data->no_tlp }}</td>
                                                 <td>
                                                     <form action="{{ route('karyawan.destroy', $data->id) }}"
-                                                        method="post">
                                                         @method('delete')
-                                                        @csrf
-                                                        @role('admin')
-                                                            <a href="{{ route('karyawan.edit', $data->id) }}"
-                                                                class="btn btn-outline-info">Edit</a>
+                                                         @csrf
+                                                           @role('admin')
+                                                        <a href="{{ route('karyawan.edit', $data->id) }}"
+                                                            class="btn btn-outline btn-sm btn btn-warning">Edit</a>
                                                         @endrole
-                                                        <a href="{{ route('karyawan.show', $data->id) }}"
-                                                            class="btn btn-outline-warning">Show</a>
                                                         @role('admin')
                                                             <button type="submit" class="btn btn-outline-danger"
                                                                 onclick="return confirm('Are you sure for delete it?');">Delete</button>

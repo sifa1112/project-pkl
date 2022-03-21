@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jabatan;
 use App\Models\Karyawan;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class KaryawanController extends Controller
@@ -15,7 +16,7 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        $karyawan = Karyawan::with('jabatan')->get();
+        $karyawan = Karyawan::with('jabatan', 'user')->get();
         return view('admin.karyawan.index', compact('karyawan'));
     }
 
@@ -28,7 +29,8 @@ class KaryawanController extends Controller
     {
         //mengambil data jabatan
         $jabatan = Jabatan::all();
-        return view('admin.karyawan.create', compact('jabatan'));
+        $user = User::all();
+        return view('admin.karyawan.create', compact('jabatan', 'user'));
     }
 
     /**
@@ -40,7 +42,6 @@ class KaryawanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_karyawan' => 'required',
             'ttl' => 'required',
             'jk' => 'required',
             'agama' => 'required',
@@ -49,8 +50,14 @@ class KaryawanController extends Controller
             'jabatan_id' => 'required',
         ]);
 
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt("12345678");
+        $user->save();
+
         $karyawan = new Karyawan;
-        $karyawan->nama_karyawan = $request->nama_karyawan;
+        $karyawan->user_id = $user->id;
         $karyawan->ttl = $request->ttl;
         $karyawan->jk = $request->jk;
         $karyawan->agama = $request->agama;
@@ -88,7 +95,8 @@ class KaryawanController extends Controller
     {
         $karyawan = Karyawan::findOrFail($id);
         $jabatan = Jabatan::all();
-        return view('admin.karyawan.edit', compact('karyawan', 'jabatan'));
+        $user = User::all();
+        return view('admin.karyawan.edit', compact('karyawan', 'jabatan', 'user'));
     }
 
     /**
@@ -100,18 +108,24 @@ class KaryawanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama_karyawan' => 'required',
-            'ttl' => 'required',
-            'jk' => 'required',
-            'agama' => 'required',
-            'alamat' => 'required',
-            'no_tlp' => 'required',
-            'jabatan_id' => 'required',
-        ]);
+        // $request->validate([
+        //     'user_id' => 'required',
+        //     'ttl' => 'required',
+        //     'jk' => 'required',
+        //     'agama' => 'required',
+        //     'alamat' => 'required',
+        //     'no_tlp' => 'required',
+        //     'jabatan_id' => 'required',
+        // ]);
+
+        $user = User::find($request->user_id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt("12345678");
+        $user->save();
 
         $karyawan = Karyawan::findOrFail($id);
-        $karyawan->nama_karyawan = $request->nama_karyawan;
+        $karyawan->user_id = $user->id;
         $karyawan->ttl = $request->ttl;
         $karyawan->jk = $request->jk;
         $karyawan->agama = $request->agama;

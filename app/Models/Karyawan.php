@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Karyawan extends Model
 {
     use HasFactory;
-    protected $visible = ['nama', 'ttl', 'jk', 'agama', 'no_tlp', 'jabatan_id'];
+    protected $visible = ['user_id', 'ttl', 'jk', 'agama', 'no_tlp', 'jabatan_id'];
 
     //memberikan akses dat apa saja yang bisa diisi
-    protected $fillable = ['nama', 'ttl', 'jk', 'agama', 'alamat', 'no_hp', 'jabatan_id'];
+    protected $fillable = ['user_id', 'ttl', 'jk', 'agama', 'alamat', 'no_hp', 'jabatan_id'];
 
     public function jabatan()
     {
@@ -23,6 +23,11 @@ class Karyawan extends Model
     {
         // model karyawan bisa memiliki 1 data dari model gaji
         // melalui fk 'id_karyawan'
-        return $this->hasOne('App\Models\Gaji', 'id_karyawan');
+        return $this->hasOne('App\Models\Gaji', 'karyawan_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 }

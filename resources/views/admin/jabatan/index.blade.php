@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Data Jabatan')
 
 @section('content_header')
 
@@ -41,10 +41,10 @@
                                                 <form action="{{ route('jabatan.destroy', $data->id) }}" method="post">
                                                     @method('delete')
                                                     @csrf
-                                                    <a href="{{ route('jabatan.edit', $data->id) }}"
-                                                        class="btn btn-outline-info">Edit</a>
-                                                    <a href="{{ route('jabatan.show', $data->id) }}"
-                                                        class="btn btn-outline-warning">Show</a>
+                                                    {{-- <a href="{{ route('jabatan.edit', $data->id) }}"
+                                                        class="btn btn-outline-info">Edit</a> --}}
+                                                    {{-- <a href="{{ route('jabatan.show', $data->id) }}"
+                                                        class="btn btn-outline-warning">Show</a> --}}
                                                     <button type="submit" class="btn btn-outline-danger"
                                                         onclick="return confirm('Are you sure?');">Delete</button>
                                                 </form>

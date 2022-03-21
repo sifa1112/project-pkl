@@ -3,7 +3,7 @@
 use App\Http\Controllers\GajiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KaryawanController;
-use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +29,7 @@ Auth::routes(
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// role admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('admin', function () {
         return ('admin.index');
@@ -36,22 +37,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('karyawan', KaryawanController::class);
     Route::resource('jabatan', JabatanController::class);
     Route::resource('gaji', GajiController::class);
-  Route::get('laporan', [GajiController::class, 'laporan']);
-    
-
-    // Route::get('laporan', [GajiController::class, 'laporan'])->name('laporan');
-
+    Route::get('laporan', [GajiController::class, 'laporan']);
 });
 
-Route::group(['prefix' => 'karyawan', 'middleware' => ['auth', 'role:karyawan|admin']],
-    function () {
-        Route::get('karyawan', function () {
-            return view('karyawan.index');
-        })->middleware(['role:karyawan']);
-        Route::resource('karyawan', KaryawanController::class);
-        Route::resource('gaji', GajiController::class);
-        // Route::get('laporan', [GajiController::class, 'laporan'])->name('laporan');
-    });
+// Route::group(['prefix' => 'karyawan', 'middleware' => ['auth', 'role:karyawan|admin']],
+//     function () {
+//         Route::get('karyawan', function () {
+//             return view('karyawan.index');
+//         })->middleware(['role:karyawan']);
+//         Route::resource('karyawan', KaryawanController::class);
+//         Route::resource('gaji', GajiController::class);
+
+//         // Route::get('laporan', [GajiController::class, 'laporan'])->name('laporan');
+//     });
 
 //  //route admin
 //  Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
